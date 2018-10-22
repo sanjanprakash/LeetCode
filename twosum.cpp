@@ -1,24 +1,22 @@
 class Solution {
 public:
-    
     vector<int> twoSum(vector<int>& nums, int target) {
-        int comp,i,j,n = nums.size();
-        vector<int>ans;
-        bool flag = false;
-        for (i = 0; i < n - 1; i++) {
-            for (j = i + 1; j < n; j++) {
-                if (nums[i] + nums[j] == target) {
-                    flag = true;
-                    break;    
+        vector<int> ans;
+        if(nums.size() > 2){
+            map<int,int> sums;
+            for(int i = 0; i < nums.size(); i++){
+                int diff = target - nums[i];
+                if(sums.find(diff) == sums.end())
+                    sums[nums[i]] = i;
+                else {
+                    ans.push_back(sums[diff]);
+                    ans.push_back(i);
+                    return ans;
                 }
             }
-            if (flag == true)
-                break;
         }
-        if (flag == true) {
-            ans.push_back(i);
-            ans.push_back(j);
-        }
+        ans.push_back(0);
+        ans.push_back(1);
         return ans;
     }
 };
