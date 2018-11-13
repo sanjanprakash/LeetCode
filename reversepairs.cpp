@@ -19,9 +19,13 @@ public:
         vector<int> sorted;
         int count = 0;
         int k;
-        int i = l, j;
-        for (j = m; i != m; i++) {
-            for (; j != r && 0.5 * (nums[i]) > (nums[j]); j++);
+        int i, j = m;
+        for (i = l; i != m; i++) {
+            while (j < r) {
+                if (0.5 * (nums[i]) <= (nums[j]))
+                    break;
+                j++;
+            }
             count += j - m;
         }
         i = l;
