@@ -26,8 +26,7 @@ public:
     
     /** @return the next smallest number */
     int next() {
-        int ans;
-        ans = curr->val;
+        int ans= curr->val;
         S.pop();
         if (curr->right != NULL) {
             curr = curr->right;
