@@ -9,18 +9,21 @@
  */
 class Solution {
 private :
-    vector<int> nodes;
+    TreeNode *curr;
 public:    
-    void levelOrderTillKth(TreeNode *root, int k) {
-        if (root != NULL && nodes.size() != k) {
-            levelOrderTillKth(root->left,k);
-            nodes.push_back(root->val);
+    void levelOrderTillKth(TreeNode *root, int &k) {
+        if (root != NULL && k > 0) {
+                levelOrderTillKth(root->left,k);
+            if (k > 0) {
+                curr = root;
+                k--;
+            }
             levelOrderTillKth(root->right,k);
         }
     }
     
     int kthSmallest(TreeNode* root, int k) {
         levelOrderTillKth(root,k);
-        return nodes[k-1];
+        return curr->val;
     }
 };
