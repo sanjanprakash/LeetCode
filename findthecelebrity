@@ -1,0 +1,18 @@
+bool knows(int a, int b);
+
+class Solution {
+public:
+    int findCelebrity(int n) {
+        int ans = 0;
+        int i;
+        for (i = 1; i < n; i++) {
+            if (!knows(i,ans))
+                ans = i;
+        }
+        for (i = 0; i < n; i++) {
+            if (i != ans && (!knows(i,ans) || knows(ans,i)))
+                return -1;
+        }
+        return ans;
+    }
+};
