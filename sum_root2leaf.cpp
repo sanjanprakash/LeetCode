@@ -9,23 +9,19 @@
  */
 class Solution {
 public:
-    vector<int>nums;
-    void summer(int ans, TreeNode *root) {
+    void treeSummer(TreeNode *root, int &sum, int num) {
         if (root != NULL) {
-            int num = 10*ans + root->val;
+            num = (num*10) + root->val;
             if (root->left == NULL && root->right == NULL)
-                nums.push_back(num);
-            else {
-                summer(num, root->left);
-                summer(num, root->right);
-            }
-        }    
+                sum += num;
+            treeSummer(root->left,sum,num);
+            treeSummer(root->right,sum,num);
+        }
     }
+    
     int sumNumbers(TreeNode* root) {
-        summer(0,root);
         int ans = 0;
-        for (int i = 0; i < nums.size(); i++)
-            ans += nums[i];
+        treeSummer(root,ans,0);
         return ans;
     }
 };
