@@ -9,19 +9,17 @@
  */
 class Solution {
 public:
-    bool Checker(TreeNode *root, long &l) {
+    bool aux(TreeNode *root, long l, long r) {
         if (root == NULL)
             return true;
-        if (Checker(root->left,l) == false)
+        if (root->val <= l || root->val >= r)
             return false;
-        if (root->val <= l)
-            return false;
-        l = root->val;
-        return Checker(root->right,l);
+        return aux(root->left,l,root->val) && aux(root->right,root->val,r);
     }
     
     bool isValidBST(TreeNode* root) {
         long l = LONG_MIN;
-        return Checker(root,l);        
+        long r = LONG_MAX;
+        return aux(root,l,r);    
     }
 };
