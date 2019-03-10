@@ -1,35 +1,33 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-        if (s.length() == 0)
-            return "";
-        if (s.length() == 1)
-            return s;
-        int n = s.length(),i,j,k;
-        int start = 0,max = 1;
-        vector<vector<bool>> table(s.size(), vector<bool>(s.size(), false));
+        int n = s.length();
+        int start = 0,end = 0;
+        int max_length = INT_MIN;
+        int i,j;
+        string ans = "";
+        vector<vector<bool>> dp = vector(n,vector<bool>(n,false));
+        
         for (i = 0; i < n; i++) {
-            table[i][i] = true;
+            for (j = 0; j < i; j++)
+                dp[i][j] = true;            
         }
-        for (i = 0; i < n - 1; i++) {
-            if (s[i] == s[i + 1]) {
-                table[i][i + 1] = true;
-                start = i;
-                max = 2;
-            }
-        }
-        for (k = 3; k <= n; k++) {
-            for (i = 0; i < n - k + 1; i++) {
-                j = i + k - 1;
-                if (table[i + 1][j - 1] == true && s[i] == s[j]) {
-                    table[i][j] = true;
-                    if (k > max) {
-                        max = k;
+        
+        for (i = n-1; i >= 0; i--) {
+            dp[i][i] = true;
+            for (j = i+1; j < n; j++) {
+                if (s[i] == s[j] && dp[i+1][j-1] == true) {
+                    dp[i][j] = true;
+                    if (max_length < j-i+1) {
+                        max_length = j-i+1;
                         start = i;
+                        end = j;
                     }
                 }
             }
         }
-        return s.substr(start,max);
+        for (i = start; i <= end; i++)
+            ans += s[i];
+        return ans;
     }
 };
