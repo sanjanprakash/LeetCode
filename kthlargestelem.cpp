@@ -16,21 +16,21 @@ public:
         return j;
     }
     
-    int kthLargestHelper(vector<int> &nums, int l, int r, int k) {
+    int kthSmallestHelper(vector<int> &nums, int l, int r, int k) {
         if (0 < k && k <= r-l+1) {
             int pivot = partition(nums,l,r);
             if (pivot-l == k-1)
                 return nums[pivot];
             if (pivot-l > k-1)
-                return kthLargestHelper(nums,l,pivot-1,k);
+                return kthSmallestHelper(nums,l,pivot-1,k);
             else
-                return kthLargestHelper(nums,pivot+1,r,k-pivot+l-1);
+                return kthSmallestHelper(nums,pivot+1,r,k-pivot+l-1);
         }
         return INT_MAX;
     }
     
     int findKthLargest(vector<int>& nums, int k) {
         int asc_order = nums.size() - k + 1;
-        return kthLargestHelper(nums,0,nums.size()-1,asc_order);
+        return kthSmallestHelper(nums,0,nums.size()-1,asc_order);
     }
 };
