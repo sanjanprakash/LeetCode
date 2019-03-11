@@ -7,7 +7,7 @@ public:
         swap(nums[r],nums[l+pivot_idx]);
         int pivot = nums[r];
         for (i = l; i < r; i++) {
-            if (nums[i] <= pivot) {
+            if (nums[i] >= pivot) {
                 swap(nums[i],nums[j]);
                 j++;
             }
@@ -30,7 +30,6 @@ public:
     }
     
     int findKthLargest(vector<int>& nums, int k) {
-        int asc_order = nums.size() - k + 1;
-        return kthSmallestHelper(nums,0,nums.size()-1,asc_order);
+        return kthSmallestHelper(nums,0,nums.size()-1,k);
     }
 };
