@@ -9,42 +9,28 @@
  */
 class Solution {
 public:
-    vector<vector<int> > levelOrderTraversal(TreeNode *root) {
+    vector<double> averageOfLevels(TreeNode* root) {
         int i, size;
-        queue<TreeNode *> Q;
+        double sum;
         TreeNode *curr;
-        vector<vector<int> > ans;
+        vector<double> ans;
+        queue<TreeNode *> Q;
         if (root) {
             Q.push(root);
             while (!Q.empty()) {
                 size = Q.size();
-                vector<int> uno_level;
+                sum = 0;
                 for (i = 0; i < size; i++) {
                     curr = Q.front();
                     Q.pop();
-                    uno_level.push_back(curr->val);
+                    sum += double(curr->val);
                     if (curr->left)
                         Q.push(curr->left);
                     if (curr->right)
                         Q.push(curr->right);
                 }
-                ans.push_back(uno_level);
+                ans.push_back(sum/double(size));
             }
-        }
-        return ans;
-    }
-    
-    vector<double> averageOfLevels(TreeNode* root) {
-        int i, j;
-        double sum;
-        vector<double> ans;
-        vector<vector<int> > all_levels = levelOrderTraversal(root);
-        for (i = 0; i < all_levels.size(); i++) {
-            sum = 0.0;
-            for (j = 0; j < all_levels[i].size(); j++) {
-                sum += double(all_levels[i][j]);
-            }
-            ans.push_back(sum/double(all_levels[i].size()));
         }
         return ans;
     }
