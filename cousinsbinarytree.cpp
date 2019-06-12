@@ -28,6 +28,6 @@ public:
         int par_x = 0, par_y = 0;
         h_x = finder(root,par_x,0,x);
         h_y = finder(root,par_y,0,y);
-        return h_x && h_y && h_x == h_y && par_x != par_y ? true : false;
+        return h_x && h_y && h_x == h_y && par_x != par_y;
     }
 };
