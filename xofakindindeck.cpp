@@ -9,18 +9,15 @@ public:
     }
     
     bool hasGroupsSizeX(vector<int>& deck) {
-        int i, hcf;
+        int i, hcf = 0;
         map<int,int> freqs;
         map<int,int>::iterator it;
         if (deck.size() <= 1)
             return false;
         for (i = 0; i < deck.size(); i++)
             freqs[deck[i]]++;
-        it = freqs.begin();
-        hcf = gcd(it->second,it->second);
-        it++;
-        for (; it != freqs.end(); it++) {
-            hcf = gcd(hcf,it->second);
+        for (it = freqs.begin(); it != freqs.end(); it++) {
+            hcf = gcd(it->second,hcf);
             if (hcf == 1)
                 return false;
         }
