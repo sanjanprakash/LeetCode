@@ -6,6 +6,6 @@ public:
                 break;
             n /= 2;
         }   
-        return n <= 0 || n > 1 ? false : true;
+        return n == 1;
     }
 };
