@@ -12,9 +12,7 @@ public:
             freqs.push_back(make_pair(0,97+i));
         for (i = 0; i < n; i++) {
             freqs[S[i]-'a'].first++;
-            if (n%2 && freqs[S[i]-'a'].first > n/2 + 1)
-                return "";
-            else if (n%2 == 0 && freqs[S[i]-'a'].first > n/2)
+            if (freqs[S[i]-'a'].first > (n+1)/2)
                 return "";
         }
         sort(freqs.begin(),freqs.end(),compare);
