@@ -8,6 +8,10 @@ public:
             return 0;
         if (dp[l][r][k])
             return dp[l][r][k];
+        while (l < r && boxes[r] == boxes[r-1]) {
+            r--;
+            k++;
+        }
         dp[l][r][k] = helper(boxes,l,r-1,0) + (k+1)*(k+1);
         for (i = l; i < r; i++) {
             if (boxes[i] == boxes[r])
