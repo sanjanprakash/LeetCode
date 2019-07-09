@@ -3,16 +3,12 @@ public:
     int change(int amount, vector<int>& coins) {
         int i,j;
         int n = coins.size();
-        vector<vector<int> > dp(amount+1,vector<int>(n+1,0));
-        for (i = 0; i <= n; i++)
-            dp[0][i] = 1;
-        for (i = 1; i <= amount; i++) {
-            for (j = 1; j <= n; j++) {
-                dp[i][j] += dp[i][j-1];
-                if (coins[j-1] <= i)
-                    dp[i][j] += dp[i-coins[j-1]][j];
-            }
+        vector<int>  dp(amount+1,0);
+        dp[0] = 1;
+        for (i = 0; i < n; i++) {
+            for (j = coins[i]; j <= amount; j++) 
+                dp[j] += dp[j-coins[i]];
         }
-        return dp[amount][n];
+        return dp[amount];
     }
 };
