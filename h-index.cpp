@@ -5,12 +5,8 @@ public:
         if (n < 2)
             return n == 1 && !citations[0] ? n-1 : n;
         sort(citations.begin(),citations.end());
-        for (i = 0; i < n; i++) {
-            if (n-i <= citations[i])
-                ans = max(ans,n-i);
-            else
-                ans = citations[i];
-        }
+        for (i = 0; i < n; i++) 
+            ans = n-i <= citations[i] ? max(ans,n-i) : citations[i];
         return ans;
     }
 };
