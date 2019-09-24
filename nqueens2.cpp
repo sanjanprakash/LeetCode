@@ -1,17 +1,17 @@
 class Solution {
 public:
     int totalNQueens(int n) {
+        int ans = 0;
         vector<bool> visited_columns(n,false);
         vector<string> grid(n,string(n,'.'));
-        vector<vector<string> > ans;
         dfs(grid,visited_columns,ans,n);
-        return ans.size();
+        return ans;
     }
     
-    void dfs(vector<string>& grid, vector<bool>& visited, vector<vector<string> >& ans, int n) {
+    void dfs(vector<string>& grid, vector<bool>& visited, int& ans, int n) {
         int i, dim = grid[0].length();
         if (!n) {
-            ans.push_back(grid);
+            ans++;
             return;
         }
         for (i = 0; i < dim; i++) {
