@@ -1,12 +1,5 @@
 class Solution {
-public:
-    int most_frequent(vector<int> &count) {
-        int ans = INT_MIN;
-        for (auto &x : count)
-            ans = max(ans,x);
-        return ans;
-    }
-    
+public:    
     int characterReplacement(string s, int k) {
         int l = 0, r = 0, n = s.length(), ans = 0;
         int most = INT_MIN;
@@ -15,10 +8,8 @@ public:
             freqs[s[r]-'A']++;
             if (freqs[s[r++]-'A'] > most) 
                 most = freqs[s[r-1]-'A'];
-            while (l < r && r-l-most > k) {
+            while (l < r && r-l-most > k) 
                 freqs[s[l++]-'A']--;
-                most = most_frequent(freqs);
-            }
             ans = max(ans,r-l);
         }
         return ans;
