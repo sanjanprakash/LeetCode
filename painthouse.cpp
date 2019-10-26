@@ -4,13 +4,14 @@ public:
         int i, n = costs.size();
         int ans = 0;
         if (n) {
-            vector<vector<int> > dp(n+1,vector<int>(3,0));
+            vector<int> prev(3,0), dp(3,0);
             for (i = 0; i < n; i++) {
-                dp[i+1][0] = costs[i][0] + min(dp[i][1],dp[i][2]);
-                dp[i+1][1] = costs[i][1] + min(dp[i][0],dp[i][2]);
-                dp[i+1][2] = costs[i][2] + min(dp[i][0],dp[i][1]);
+                dp[0] = costs[i][0] + min(prev[1],prev[2]);
+                dp[1] = costs[i][1] + min(prev[0],prev[2]);
+                dp[2] = costs[i][2] + min(prev[0],prev[1]);
+                prev = dp;
             }
-            ans = min(dp[n][0],min(dp[n][1],dp[n][2]));
+            ans = min(dp[0],min(dp[1],dp[2]));
         }
         return ans;
     }
