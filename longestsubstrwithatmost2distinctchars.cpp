@@ -8,16 +8,12 @@ public:
             freqs[s[r]]++;
             if (freqs[s[r++]] == 1)
                 unique++;
-            if (unique < 3)
-                longest = max(longest,r-l);
-            else {
-                while (unique > 2) {
-                    freqs[s[l]]--;
-                    if (!freqs[s[l++]])
-                        unique--;
-                }
-                longest = max(longest,r-l);
+            while (unique > 2) {
+                freqs[s[l]]--;
+                if (!freqs[s[l++]])
+                    unique--;
             }
+            longest = max(longest,r-l);
         }
         return longest;
     }
