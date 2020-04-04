@@ -20,11 +20,11 @@ public:
             root->left = removeLeafNodes(root->left, target);
         if (!isLeaf(root->right))
             root->right = removeLeafNodes(root->right, target);
-        if (root->left && root->left->val == target && isLeaf(root->left)) {
+        if (root->left && isLeaf(root->left) && root->left->val == target) {
             delete(root->left);
             root->left = NULL;
         }
-        if (root->right && root->right->val == target && isLeaf(root->right)) {
+        if (root->right && isLeaf(root->right) && root->right->val == target) {
             delete(root->right);
             root->right = NULL;
         }
