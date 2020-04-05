@@ -2,13 +2,13 @@ class Solution {
 public:
     int minSteps(string s, string t) {
         int ans = 0;
-        unordered_map<char,int> freqs;
+        vector<int> freqs(26,0);
         for (auto &x : s)
-            freqs[x]++;
+            freqs[x-'a']++;
         for (auto &x : t)
-            freqs[x]--;
+            freqs[x-'a']--;
         for (auto &x : freqs)
-            ans += abs(x.second);
+            ans += abs(x);
         return ans/2;
     }
 };
