@@ -1,14 +1,12 @@
 class Solution {
 public:
-    int dfs(vector<vector<int>>& graph, vector<bool>& visited, vector<bool>& grey, int curr) {
+    int dfs(vector<vector<int>>& graph, vector<bool>& visited, int curr) {
         int nodes = 1;
         visited[curr] = true;
-        grey[curr] = true;
         for (int x : graph[curr]) {
             if (!visited[x])
-                nodes += dfs(graph, visited, grey, x);
+                nodes += dfs(graph, visited, x);
         }
-        grey[curr] = false;
         return nodes;
     }
     
@@ -17,7 +15,7 @@ public:
         int swaps = 0;
         vector<int> couches(n, 0);
         vector<vector<int>> couch_graph(n/2, vector<int>());
-        vector<bool> visited(n/2, false), grey(n/2, false);
+        vector<bool> visited(n/2, false);
         
         for (i = 0; i < n; i++)
             couches[row[i]] = i/2;
@@ -30,7 +28,7 @@ public:
         
         for (i = 0; i < n/2; i++) {
             if (!visited[i]) 
-                swaps += dfs(couch_graph, visited, grey, i) - 1;
+                swaps += dfs(couch_graph, visited, i) - 1;
         }
         
         return swaps;
