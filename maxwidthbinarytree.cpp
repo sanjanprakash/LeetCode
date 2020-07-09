@@ -4,38 +4,37 @@
  *     int val;
  *     TreeNode *left;
  *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
-public:
+public:    
     int widthOfBinaryTree(TreeNode* root) {
-        if (root == NULL)
-            return 0;
-        deque<TreeNode *>Q;
-        TreeNode *curr;
-        int ans = 1,s,i;
-        Q.push_back(root);
-        while (!Q.empty()) {
-            while (Q.size() > 0 && Q.front() == NULL)
-                Q.pop_front();
-            while(Q.size() > 0 && Q.back() == NULL)
-                Q.pop_back();
-            s = Q.size();
-            if (s == 0)
-                break;
-            if (s > ans)
-                ans = s;
-            for (i = 0; i < s; i++) {
-                curr = Q.front();
-                Q.pop_front();
-                if (curr != NULL) {
-                    Q.push_back(curr->left);
-                    Q.push_back(curr->right);
-                }
-                else {
-                    Q.push_back(NULL);
-                    Q.push_back(NULL);
+        int ans = 0, s;
+        TreeNode* curr;
+        deque<TreeNode*> q;
+        if (root) {
+            q.push_back(root);
+            while (!q.empty()) {
+                while (!q.empty() && !q.front())
+                    q.pop_front();
+                while (!q.empty() && !q.back())
+                    q.pop_back();
+                s = q.size();
+                ans = max(ans, s);
+                while (s--) {
+                    curr = q.front();
+                    q.pop_front();
+                    if (curr) {
+                        q.push_back(curr->left);
+                        q.push_back(curr->right);
+                    }
+                    else {
+                        q.push_back(NULL);
+                        q.push_back(NULL);
+                    }
                 }
             }
         }
