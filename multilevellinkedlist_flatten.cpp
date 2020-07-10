@@ -18,14 +18,7 @@ public:
 };
 */
 class Solution {
-public:
-    
-    Node *Ender(Node *start) {
-        while (start->next != NULL)
-            start = start->next;
-        return start;
-    }
-    
+public:    
     Node* flatten(Node* head) {
         Node *curr = head, *child_end, *nxt;
         while (curr != NULL) {
