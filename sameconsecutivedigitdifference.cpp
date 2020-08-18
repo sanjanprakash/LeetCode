@@ -1,26 +1,24 @@
 class Solution {
 public:
-    vector<int> numsSameConsecDiff(int N, int K) {
-        int i,j;
-        int temp;
-        vector<int> ans;
-        for (i = 0; i < 10; i++)
-            ans.push_back(i);
-        if (N > 1) {
-            ans.erase(ans.begin());
-            N--;
-            while (N > 0) {
-                for (i = ans.size(); i > 0; i--) {
-                    temp = ans[0];
-                    ans.erase(ans.begin());
-                    for (j = 0; j < 10; j++) {
-                        if (abs((temp % 10) - j) == K)
-                            ans.push_back(10*temp + j);
-                    }
-                }
-                N--;
+    void dfs(int temp, int digits, int K, vector<int>& result) {
+        int i, last = temp%10;
+        if (!digits) 
+            result.push_back(temp);
+        else {
+            for (i = 0; i < 10; i++) {
+                if (abs(last-i) == K)
+                    dfs(temp*10+i, digits-1, K, result);
             }
         }
+    }
+    
+    vector<int> numsSameConsecDiff(int N, int K) {
+        int i;
+        vector<int> ans;
+        if (N == 1)
+            ans.push_back(0);
+        for (i = 1; i < 10; i++) 
+            dfs(i, N-1, K, ans);
         return ans;
     }
 };
