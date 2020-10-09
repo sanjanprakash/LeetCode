@@ -13,6 +13,6 @@ public:
             if (idx <= 40)
                 break;
         }
-        return 1 + (idx-1)%10;
+        return 1 + (idx%10);
     }
 };
